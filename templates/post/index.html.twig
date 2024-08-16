@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Avance{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9">
+                <div class="row my-2 py-2" style="border-bottom:solid 2px;">
+                    {% for posts in posts %}
+                    <div class="col-md-7">
+                    <div class="row">
+                        
+                        <div class="col-md-12 my-3">
+                            <h1>{{posts.rubrik.name|capitalize}}
+                            </h1>
+                        </div>
+                        <a class="col-md-12 my-3 title" href="{{path('show', {id: posts.id})}}">
+                            <h2>{{posts.title}}</h2>
+                        </a>
+                        <div class="col-md-12 mb-3">
+                           <h3> {{posts.content1}}</h3>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            {{posts.createdAt|date('D d M Y ')}}
+                        </div>
+                        <img class="roundedImage" src="{{asset('divers/avatars/' ~ posts.user.avatar)}}" alt=""/>&emsp;
+                        {{posts.user.firstname|capitalize}} {{posts.user.lastname|upper}} &emsp; {{posts.user.city}}
+                    </div>
+                    
+                    </div>
+                    <a class="col-md-5" href="{{path('show', {id: posts.id})}}">
+                        <img class="my-3  d-flex" src="{{asset('divers/images/' ~ posts.photo)}}" alt="Mon image"/>
+                    </a>
+                    {% endfor %}
+                </div>
+                
+                </div>
+                <div class="row my-2 py-2" style="border-bottom:solid 2px;">
+                {% for posts2 in posts2 %}
+                    <a class="col-md-5 my-3" href="{{path('show', {id: posts2.id})}}">
+                        <img class="my-3  d-flex imgPost2" src="{{asset('divers/images/' ~ posts2.photo)}}" alt="Mon image"/>
+                    </a >
+                    <div class="col-md-7 my-3">
+                    <div class="row">
+                        
+                        <div class="col-md-12 my-3">
+                            <h1>{{posts2.rubrik.name|capitalize}}
+                            </h1>
+                        </div>
+                        <a class="col-md-12 my-3 title" href="{{path('show', {id: posts2.id})}}">
+                            <h2>{{posts2.title}}</h2>
+                        </a>
+                        <div class="col-md-12 mb-3">
+                           <h3> {{posts2.content1}}</h3>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            {{posts2.createdAt|date('D d M Y ')}}
+                        </div>
+                        <div class="txt-red">
+						{% if is_granted("ROLE_USER") %}
+                            {% set isFavorite = false %}
+							{% for favoris in posts2.favoris %}
+								{% if favoris.id == app.user.id %}
+                                    {% set isFavorite = true %}
+								{% endif %}    
+							{% endfor %}
+                            {% if isFavorite %}
+								<a href="{{ path('ajout_favoris', {id: posts2.id}) }}"><i class="fas fa-heart"></i></a>
+                            {% else %}
+								<a href="{{ path('retrait_favoris', {id: posts2.id}) }}"><i class="far fa-heart"></i></a>
+                            {% endif %}
+
+						{% else %}
+							<i class="far fa-heart"></i>
+						{% endif %}
+						
+					</div>
+                        <img class="roundedImage" src="{{asset('divers/avatars/' ~ posts2.user.avatar)}}" alt=""/>&emsp;
+                        {{posts2.user.firstname|capitalize}} {{posts2.user.lastname|upper}} &emsp; {{posts2.user.city}}
+                    </div>
+                    
+                    </div>
+                {% endfor %}
+                </div>
+            </div>
+        </div>    
+    </div>
+{% endblock %}

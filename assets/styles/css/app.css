@@ -1,0 +1,19 @@
+.imgPost2{
+    display: flex;
+    width: 90%;
+    height: fit-content;
+}
+a.title{
+    color: red;
+    font-weight: bold;
+    text-decoration: none;
+}
+a.title:hover{
+    color: black;
+    text-decoration: none;
+}
+.roundedImage{
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+}

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+    <style></style>
+  </head>
+  <body>
+<nav class="navbar navbar-expand-lg navbar-light bg-danger">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{{ path('app_post') }}" style="color:white;">Avance</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{{ path('app_post') }}" style="color:white;"><i class="fa fa-home" aria-hidden="true"></i></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" style="color:white;">Link</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color:white;">
+            Dropdown
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </li>
+          <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color:white;">
+            Rubrik
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="{{path ('posts_by_rubrik', {id: 1})}}">Politique</a></li>
+            <li><a class="dropdown-item" href="{{path ('posts_by_rubrik', {id: 2})}}">Sport</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </li>
+          <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color:white;">
+            Dropdown
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </li>
+      </ul>
+
+        {# <div class="header-social-links d-flex">
+            {% if app.user %}
+              <a class="col-md-12 dropbtn" href="{{path('app_logout')}}">
+                  {% if app.user.avatar is empty %}
+                    <i class="fa-solid fa-circle-user"></i>
+                  {% elseif app.user.option is same as ('yes')%}
+                    <img class="imgRounded rounded" src="{{asser('divers/avatars/' ~ app.user.avatar)}}" style="width:25px; height:25px;">&ensp;
+                    <span class="firtstname">{{app.user.firstname|capitalize }}</span><span class="lastname">{{app.user.lastname|capitalize }}</span>
+                    <a class="" href="{{path('app_logout')}}">
+                      <i class="fa fa-power-off loggouts"></i>
+                    </a>
+                    <a class="admin" href="{{path('admin')}}">
+                      <i class=""fa-solid fa-circle-play></i>
+                    </a>
+                  {% else %}
+                    <img class="imgRounded rounded" src="{{asser('divers/avatars/' ~ app.user.avatar)}}" style="width:25px; height:25px;">&ensp;
+                    <span class="firtstname">{{app.user.firstname|capitalize }}</span><span class="lastname">{{app.user.lastname|capitalize }}</span>
+                    <a class="" href="{{path('app_logout')}}">
+                      <i class="fa fa-power-off loggouts"></i>
+                    </a>
+            {% endif %}  
+              </a>
+            {% else %}
+                <a class="" href="{{path('app_login')}}">
+                  <i class="far fa-user-circle"></i>
+                </a>
+            {% endif %}
+        </div> #}
+
+
+      <div class="header-social-link d-flex">
+
+        {% if not app.user %}
+            <a class="" href="{{path('app_login')}}" style="color:white;">
+              <i class="far fa-user-circle"></i>
+            </a>
+        {% else %}
+            <h6 class="" style="width:180px; font-size:0.8em; color:white; cursor:pointer; margin-left:12px;">
+                <img class="roundedImage" src="{{asset('divers/avatars/' ~ app.user.avatar)}}" alt="">
+                {{app.user.firstname}}&ensp;{{app.user.lastname}}
+            </h6>
+        {% endif %}
+        <div class="header-social-links d-flex">
+           <div class="col-md-2">
+              {% if not app.user %}
+
+              {% else %}
+
+                <a class="loggouts" href="{{ path('app_logout') }}">
+                <i class="fa fa-power-off loggouts"></i>
+                </a>
+              {% endif %}
+           </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</nav>
+</body>
+</html>
